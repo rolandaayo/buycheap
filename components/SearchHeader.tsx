@@ -17,7 +17,7 @@ export function SearchHeader() {
         <ThemedText type="title" style={styles.title}>Discover</ThemedText>
         <TouchableOpacity>
           <ThemedView style={styles.cartBadge}>
-            <Feather name="shopping-cart" size={24} />
+            <Feather name="shopping-cart" size={32} color={"white?io"} />
             <ThemedView style={styles.badge}>
               <ThemedText style={styles.badgeText}>2</ThemedText>
             </ThemedView>
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     gap: 16,
-    backgroundColor: '#fff',
   },
   header: {
     flexDirection: 'row',

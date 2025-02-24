@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     marginBottom: 16,
+    
   },
   categoryItem: {
     flex: 1,

@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { ThemedView } from './ThemedView';
-import { ThemedText } from './ThemedText';
+import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from '@/components/ThemedText';
 
 const width = Dimensions.get('window').width;
 
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   slide: {
     borderRadius: 16,
     overflow: 'hidden',
+    margin: 10
   },
   image: {
     width: '100%',
