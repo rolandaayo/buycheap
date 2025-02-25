@@ -1,38 +1,19 @@
 import React from 'react';
-import { StyleSheet, TextInput, TouchableOpacity, StatusBar, Platform } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { ThemedView } from './ThemedView';
-import { ThemedText } from './ThemedText';
 
 export function SearchHeader() {
-  const insets = useSafeAreaInsets();
-  
   return (
-    <ThemedView style={[
-      styles.container, 
-      { paddingTop: Platform.OS === 'ios' ? insets.top : StatusBar.currentHeight }
-    ]}>
-      <ThemedView style={styles.header}>
-        <ThemedText type="title" style={styles.title}>BuyCHEAP</ThemedText>
-        <TouchableOpacity>
-          <ThemedView style={styles.cartBadge}>
-            <Feather name="shopping-cart" size={32} color={"white?io"} />
-            <ThemedView style={styles.badge}>
-              <ThemedText style={styles.badgeText}>10</ThemedText>
-            </ThemedView>
-          </ThemedView>
-        </TouchableOpacity>
-      </ThemedView>
-      
-      <ThemedView style={styles.searchContainer}>
-        <Feather name="search" size={20} color="#999" />
+    <ThemedView style={styles.container}>
+      <View style={styles.searchContainer}>
+        <Feather name="search" size={20} color="#999" style={styles.searchIcon} />
         <TextInput 
           placeholder="Search products"
           style={styles.input}
           placeholderTextColor="#999"
         />
-      </ThemedView>
+      </View>
     </ThemedView>
   );
 }
@@ -40,35 +21,7 @@ export function SearchHeader() {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    gap: 16,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 28,
-  },
-  cartBadge: {
-    position: 'relative',
-    padding: 8,
-  },
-  badge: {
-    position: 'absolute',
-    top: 4,
-    right: 4,
-    backgroundColor: '#FF4C4C',
-    borderRadius: 10,
-    minWidth: 20,
-    height: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  badgeText: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: 'bold',
+    paddingTop: 8,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -76,11 +29,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     borderRadius: 12,
     paddingHorizontal: 16,
-    height: 48,
+    height: 46,
+  },
+  searchIcon: {
+    marginRight: 12,
   },
   input: {
     flex: 1,
-    marginLeft: 12,
     fontSize: 16,
   },
 }); 

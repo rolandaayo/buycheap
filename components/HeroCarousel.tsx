@@ -5,6 +5,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
 
 const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 const carouselData = [
   {
@@ -39,7 +40,7 @@ export function HeroCarousel() {
       <Carousel
         loop
         width={width - 32}
-        height={200}
+        height={height * 0.3} // 30% of screen height
         autoPlay={true}
         data={carouselData}
         scrollAnimationDuration={1000}
@@ -61,11 +62,24 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     marginVertical: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: height * 0.35, // Container slightly taller than carousel
   },
   slide: {
     borderRadius: 16,
     overflow: 'hidden',
-    margin: 10
+    margin: 10,
+    height: '100%',
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   image: {
     width: '100%',
@@ -78,12 +92,15 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     padding: 16,
-    backgroundColor: 'rgba(0,0,0,0.3)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
   },
   title: {
     color: '#fff',
     fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 4,
   },
   subtitle: {
     color: '#fff',
