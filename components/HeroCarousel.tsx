@@ -19,6 +19,18 @@ const carouselData = [
     subtitle: 'Check out latest items',
     image: require('@/assets/images/banner2.jpg'),
   },
+  {
+    id: 3,
+    title: 'Limited Time Offer',
+    subtitle: 'Don\'t miss out',
+    image: require('@/assets/images/banner3.jpg'),
+  },
+  {
+    id: 4,
+    title: 'Christmas Sale',
+    subtitle: 'Don\'t miss out',
+    image: require('@/assets/images/banner4.jpg'),
+  }
 ];
 
 export function HeroCarousel() {

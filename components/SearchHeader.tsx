@@ -14,12 +14,12 @@ export function SearchHeader() {
       { paddingTop: Platform.OS === 'ios' ? insets.top : StatusBar.currentHeight }
     ]}>
       <ThemedView style={styles.header}>
-        <ThemedText type="title" style={styles.title}>Discover</ThemedText>
+        <ThemedText type="title" style={styles.title}>BuyCHEAP</ThemedText>
         <TouchableOpacity>
           <ThemedView style={styles.cartBadge}>
             <Feather name="shopping-cart" size={32} color={"white?io"} />
             <ThemedView style={styles.badge}>
-              <ThemedText style={styles.badgeText}>2</ThemedText>
+              <ThemedText style={styles.badgeText}>10</ThemedText>
             </ThemedView>
           </ThemedView>
         </TouchableOpacity>
