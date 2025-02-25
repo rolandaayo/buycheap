@@ -3,8 +3,8 @@ import { View, Text, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import PromoBanner from '../components/PromoBanner';
 import Categories from '../components/Categories';
-import BestsellerProducts from '../components/BestsellerProducts';
-import BottomTabBar from '../components/BottomTabBar';
+// import BestsellerProducts from '../components/BestsellerProducts';
+// import BottomTabBar from '../components/BottomTabBar';
 
 const HomeScreen = () => {
   return (
@@ -13,9 +13,9 @@ const HomeScreen = () => {
         <SearchBar />
         <PromoBanner />
         <Categories />
-        <BestsellerProducts />
+        {/* <BestsellerProducts /> */}
       </ScrollView>
-      <BottomTabBar />
+      {/* <BottomTabBar /> */}
     </SafeAreaView>
   );
 };

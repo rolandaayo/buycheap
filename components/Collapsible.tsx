@@ -31,11 +31,11 @@ export function Collapsible({ title, children }: CollapsibleProps) {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 8,
-    backgroundColor: Colors[colorScheme ?? 'light'].secondary,
+    // backgroundColor: Colors[colorScheme ?? 'light'].secondary,
     borderRadius: 16,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: Colors[colorScheme ?? 'light'].border,
+    // borderColor: Colors[colorScheme ?? 'light'].border,
   },
   header: {
     flexDirection: 'row',
@@ -48,4 +48,5 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     gap: 16,
   },
-}); 
+
+});
