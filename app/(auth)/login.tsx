@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useAuth } from '@/context/AuthContext';
 import { Link } from 'expo-router';
+import { Feather } from '@expo/vector-icons';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn } = useAuth();
+  const { signIn, signInWithBiometrics, hasBiometrics, biometricType } = useAuth();
 
   const handleLogin = async () => {
     try {
@@ -16,10 +17,21 @@ export default function LoginPage() {
     }
   };
 
+  const getBiometricIcon = () => {
+    switch (biometricType) {
+      case 'Face ID':
+        return 'smile';
+      case 'Touch ID':
+        return 'smartphone';
+      default:
+        return 'lock';
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Login BuyCHEAP</Text>
         
         <TextInput
           style={styles.input}
@@ -44,6 +56,22 @@ export default function LoginPage() {
         >
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
+
+        {hasBiometrics && (
+          <TouchableOpacity 
+            style={styles.faceIdButton}
+            onPress={signInWithBiometrics}
+          >
+            <Feather 
+              name={getBiometricIcon()} 
+              size={20} 
+              color="#2563EB" 
+            />
+            <Text style={styles.faceIdText}>
+              Sign in with {biometricType}
+            </Text>
+          </TouchableOpacity>
+        )}
 
         <Link href="/signup" asChild>
           <TouchableOpacity style={styles.linkButton}>
@@ -104,5 +132,20 @@ const styles = StyleSheet.create({
   linkText: {
     color: '#2563EB',
     fontSize: 14,
+  },
+  faceIdButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 16,
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: '#EEF2FF',
+  },
+  faceIdText: {
+    marginLeft: 8,
+    color: '#2563EB',
+    fontSize: 16,
+    fontWeight: '600',
   },
 }); 
