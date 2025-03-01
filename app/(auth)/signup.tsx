@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { useAuth } from '@/context/AuthContext';
 import { Link } from 'expo-router';
 
@@ -8,17 +8,30 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
-  const { signIn } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const { signUp } = useAuth();
 
   const handleSignUp = async () => {
-    if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+    if (!email || !password || !confirmPassword || !username) {
+      Alert.alert('Error', 'Please fill in all fields');
       return;
     }
+
+    if (password !== confirmPassword) {
+      Alert.alert('Error', 'Passwords do not match!');
+      return;
+    }
+
     try {
-      await signIn(email, password); // For now, just sign in after signup
+      setIsLoading(true);
+      await signUp(username, email, password);
     } catch (error) {
-      console.error('Signup failed:', error);
+      Alert.alert(
+        'Signup Failed',
+        error instanceof Error ? error.message : 'Please try again with different credentials'
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -61,10 +74,15 @@ export default function SignUpPage() {
         />
 
         <TouchableOpacity 
-          style={styles.button}
+          style={[styles.button, isLoading && styles.buttonDisabled]}
           onPress={handleSignUp}
+          disabled={isLoading}
         >
-          <Text style={styles.buttonText}>Create Account</Text>
+          {isLoading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Create Account</Text>
+          )}
         </TouchableOpacity>
 
         <Link href="/login" asChild>
@@ -105,6 +123,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 16,
     backgroundColor: '#f8f9fa',
+    color: 'black',
   },
   button: {
     backgroundColor: '#2563EB',
@@ -126,5 +145,8 @@ const styles = StyleSheet.create({
   linkText: {
     color: '#2563EB',
     fontSize: 14,
+  },
+  buttonDisabled: {
+    opacity: 0.7,
   },
 }); 

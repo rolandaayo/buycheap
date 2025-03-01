@@ -39,21 +39,23 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const { isAuthenticated } = useAuth();
+  const { user } = useAuth();
   const segments = useSegments();
   const router = useRouter();
 
   useEffect(() => {
+    if (!segments || segments.length === 0) return;
+    
     const inAuthGroup = segments[0] === '(auth)';
 
-    if (!isAuthenticated && !inAuthGroup) {
+    if (!user && !inAuthGroup) {
       // Redirect to the login page if not authenticated
       router.replace('/(auth)/login');
-    } else if (isAuthenticated && inAuthGroup) {
+    } else if (user && inAuthGroup) {
       // Redirect to the home page if authenticated
       router.replace('/(tabs)');
     }
-  }, [isAuthenticated, segments]);
+  }, [user, segments]);
 
   return (
     <SafeAreaProvider>

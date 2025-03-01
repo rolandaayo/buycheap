@@ -9,7 +9,7 @@ import { useAuth } from '@/context/AuthContext';
 import { Feather } from '@expo/vector-icons';
 
 export default function HomeScreen() {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
   const insets = useSafeAreaInsets();
 
   return (
@@ -22,7 +22,9 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
         <View style={styles.headerBottom}>
-          <ThemedText style={styles.welcomeText}>Welcome back! 👋</ThemedText>
+          <ThemedText style={styles.welcomeText}>
+            Welcome back, {user?.username}! 👋
+          </ThemedText>
           <ThemedText style={styles.subText}>Find your favorite products</ThemedText>
         </View>
       </ThemedView>

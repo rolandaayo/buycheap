@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { useAuth } from '@/context/AuthContext';
 import { Link } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
@@ -7,13 +7,25 @@ import { Feather } from '@expo/vector-icons';
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { signIn, signInWithBiometrics, hasBiometrics, biometricType } = useAuth();
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+
     try {
+      setIsLoading(true);
       await signIn(email, password);
     } catch (error) {
-      console.error('Login failed:', error);
+      Alert.alert(
+        'Login Failed',
+        error instanceof Error ? error.message : 'Please check your credentials and try again'
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -51,10 +63,15 @@ export default function LoginPage() {
         />
 
         <TouchableOpacity 
-          style={styles.button}
+          style={[styles.button, isLoading && styles.buttonDisabled]}
           onPress={handleLogin}
+          disabled={isLoading}
         >
-          <Text style={styles.buttonText}>Sign In</Text>
+          {isLoading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Sign In</Text>
+          )}
         </TouchableOpacity>
 
         {hasBiometrics && (
@@ -147,5 +164,8 @@ const styles = StyleSheet.create({
     color: '#2563EB',
     fontSize: 16,
     fontWeight: '600',
+  },
+  buttonDisabled: {
+    opacity: 0.7,
   },
 }); 
